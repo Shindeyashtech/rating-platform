@@ -15,7 +15,7 @@ const Dashboard = () => {
     }
   }, [user, loading, navigate]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className="container">Loading...</div>;
   if (!user) return null;
 
   const renderDashboard = () => {
@@ -27,13 +27,13 @@ const Dashboard = () => {
       case 'store_owner':
         return <StoreOwnerDashboard />;
       default:
-        return <div>Unknown role</div>;
+        return <div className="card">Unknown role</div>;
     }
   };
 
   return (
-    <div>
-      <header>
+    <div className="container">
+      <header className="card">
         <h1>Dashboard</h1>
         <button onClick={logout}>Logout</button>
       </header>

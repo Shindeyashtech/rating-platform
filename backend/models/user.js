@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(60),
       allowNull: false,
       validate: {
-        len: [20, 60] // Min 20, Max 60 characters
+        len: [3, 60] // Min 3, Max 60 characters
       }
     },
     email: {
@@ -22,8 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [8, 16],
-        is: /^(?=.*[A-Z])(?=.*[!@#$%^&*])/
+        len: [8, 16]
       }
     },
     address: {

@@ -24,41 +24,45 @@ const SignupPage = () => {
   };
 
   return (
-    <div>
-      <h2>Signup</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-        <button type="submit">Signup</button>
-      </form>
-      {error && <p>{error}</p>}
-      {success && <p>{success}</p>}
-      <p>Already have an account? <a href="/login">Login</a></p>
+    <div className="container">
+      <div className="card">
+        <h2>Signup</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <small>Name must be between 3 and 60 characters.</small>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <small>Password must be 8-16 characters.</small>
+          <input
+            type="text"
+            placeholder="Address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+          <button type="submit">Signup</button>
+        </form>
+        {error && <p className="error">{error}</p>}
+        {success && <p className="success">{success}</p>}
+        <p>Already have an account? <a href="/login">Login</a></p>
+      </div>
     </div>
   );
 };

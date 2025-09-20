@@ -36,7 +36,8 @@ export const AuthProvider = ({ children }) => {
       const res = await axios.post('http://localhost:5000/auth/signup', { name, email, password, address });
       return { success: true, message: res.data.message };
     } catch (err) {
-      return { success: false, error: err.response?.data?.error || 'Signup failed' };
+      const error = err.response?.data?.errors ? err.response.data.errors.map(e => e.msg).join(', ') : err.response?.data?.error || 'Signup failed';
+      return { success: false, error };
     }
   };
 
@@ -53,7 +54,8 @@ export const AuthProvider = ({ children }) => {
       });
       return { success: true, message: res.data.message };
     } catch (err) {
-      return { success: false, error: err.response?.data?.error || 'Update failed' };
+      const error = err.response?.data?.errors ? err.response.data.errors.map(e => e.msg).join(', ') : err.response?.data?.error || 'Update failed';
+      return { success: false, error };
     }
   };
 

@@ -7,7 +7,9 @@ const db = require('./models'); // imports sequelize instance + models
 const { authenticate, authorize } = require('./middleware/auth');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: '*'
+}));
 app.use(express.json());
 
 // Sync models with DB
@@ -44,9 +46,9 @@ app.get('/ratings', async (req, res) => {
 
 // Signup for normal users
 app.post('/auth/signup', [
-  body('name').isLength({ min: 20, max: 60 }).withMessage('Name must be between 20 and 60 characters'),
+  body('name').isLength({ min: 3, max: 60 }).withMessage('Name must be between 3 and 60 characters'),
   body('email').isEmail().withMessage('Invalid email'),
-  body('password').isLength({ min: 8, max: 16 }).matches(/^(?=.*[A-Z])(?=.*[!@#$%^&*])/).withMessage('Password must be 8-16 characters with at least one uppercase letter and one special character'),
+  body('password').isLength({ min: 8, max: 16 }).withMessage('Password must be 8-16 characters'),
   body('address').optional().isLength({ max: 400 }).withMessage('Address must be less than 400 characters')
 ], async (req, res) => {
   const errors = validationResult(req);
@@ -93,7 +95,7 @@ app.post('/auth/login', [
 // Update password for all users
 app.put('/auth/password', authenticate, [
   body('oldPassword').notEmpty().withMessage('Old password is required'),
-  body('newPassword').isLength({ min: 8, max: 16 }).matches(/^(?=.*[A-Z])(?=.*[!@#$%^&*])/).withMessage('New password must be 8-16 characters with at least one uppercase letter and one special character')
+  body('newPassword').isLength({ min: 8, max: 16 }).withMessage('New password must be 8-16 characters')
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -191,9 +193,9 @@ app.post('/ratings', authenticate, authorize('normal'), [
 
 // Admin: Add user
 app.post('/admin/users', authenticate, authorize('admin'), [
-  body('name').isLength({ min: 20, max: 60 }).withMessage('Name must be between 20 and 60 characters'),
+  body('name').isLength({ min: 3, max: 60 }).withMessage('Name must be between 3 and 60 characters'),
   body('email').isEmail().withMessage('Invalid email'),
-  body('password').isLength({ min: 8, max: 16 }).matches(/^(?=.*[A-Z])(?=.*[!@#$%^&*])/).withMessage('Password must be 8-16 characters with at least one uppercase letter and one special character'),
+  body('password').isLength({ min: 8, max: 16 }).withMessage('Password must be 8-16 characters'),
   body('address').optional().isLength({ max: 400 }).withMessage('Address must be less than 400 characters'),
   body('role').isIn(['admin', 'normal', 'store_owner']).withMessage('Invalid role')
 ], async (req, res) => {

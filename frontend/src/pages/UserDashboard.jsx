@@ -16,11 +16,13 @@ const UserDashboard = () => {
   };
 
   return (
-    <div>
-      <h2>User Dashboard</h2>
-      <button onClick={() => navigate('/stores')}>View Stores</button>
+    <div className="container">
+      <div className="card">
+        <h2>User Dashboard</h2>
+        <button onClick={() => navigate('/stores')}>View Stores</button>
+      </div>
 
-      <div>
+      <div className="card">
         <h3>Update Password</h3>
         <input
           type="password"
@@ -34,6 +36,7 @@ const UserDashboard = () => {
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
         />
+        <small>Password must be 8-16 characters.</small>
         <button onClick={handleUpdatePassword}>Update</button>
         {message && <p>{message}</p>}
       </div>

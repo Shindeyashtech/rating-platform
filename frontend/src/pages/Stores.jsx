@@ -39,38 +39,39 @@ const Stores = () => {
   };
 
   return (
-    <div>
-      <h2>Stores</h2>
-      <div>
-        <input
-          placeholder="Search by name"
-          value={searchName}
-          onChange={(e) => setSearchName(e.target.value)}
-        />
-        <input
-          placeholder="Search by address"
-          value={searchAddress}
-          onChange={(e) => setSearchAddress(e.target.value)}
-        />
+    <div className="container">
+      <div className="card">
+        <h2>Stores</h2>
+        <div className="search-container">
+          <input
+            placeholder="Search by name"
+            value={searchName}
+            onChange={(e) => setSearchName(e.target.value)}
+          />
+          <input
+            placeholder="Search by address"
+            value={searchAddress}
+            onChange={(e) => setSearchAddress(e.target.value)}
+          />
+        </div>
       </div>
-      <ul>
-        {stores.map(store => (
-          <li key={store.id}>
-            <h3>{store.name}</h3>
-            <p>{store.address}</p>
-            <p>Overall Rating: {store.overallRating || 'N/A'}</p>
-            <p>Your Rating: {store.userRating || 'Not rated'}</p>
-            <select onChange={(e) => submitRating(store.id, e.target.value)}>
-              <option value="">Rate</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </li>
-        ))}
-      </ul>
+
+      {stores.map(store => (
+        <div key={store.id} className="card">
+          <h3>{store.name}</h3>
+          <p>{store.address}</p>
+          <p>Overall Rating: {store.overallRating || 'N/A'}</p>
+          <p>Your Rating: {store.userRating || 'Not rated'}</p>
+          <select onChange={(e) => submitRating(store.id, e.target.value)} defaultValue={store.userRating || ''}>
+            <option value="">Rate</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+      ))}
     </div>
   );
 };

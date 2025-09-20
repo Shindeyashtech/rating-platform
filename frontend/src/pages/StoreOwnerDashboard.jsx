@@ -30,10 +30,13 @@ const StoreOwnerDashboard = () => {
   };
 
   return (
-    <div>
-      <h2>Store Owner Dashboard</h2>
+    <div className="container">
+      <div className="card">
+        <h2>Store Owner Dashboard</h2>
+      </div>
+
       {dashboardData.store && (
-        <div>
+        <div className="card">
           <h3>Store Info</h3>
           <p>Name: {dashboardData.store.name}</p>
           <p>Email: {dashboardData.store.email}</p>
@@ -41,7 +44,8 @@ const StoreOwnerDashboard = () => {
           <p>Average Rating: {dashboardData.averageRating || 'N/A'}</p>
         </div>
       )}
-      <div>
+
+      <div className="card">
         <h3>Ratings</h3>
         <ul>
           {dashboardData.ratings?.map(rating => (
@@ -52,7 +56,7 @@ const StoreOwnerDashboard = () => {
         </ul>
       </div>
 
-      <div>
+      <div className="card">
         <h3>Update Password</h3>
         <input
           type="password"

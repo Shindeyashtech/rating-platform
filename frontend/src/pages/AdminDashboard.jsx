@@ -74,16 +74,19 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div>
-      <h2>Admin Dashboard</h2>
-      <div>
+    <div className="container">
+      <div className="card">
+        <h2>Admin Dashboard</h2>
+      </div>
+
+      <div className="card">
         <h3>Stats</h3>
         <p>Total Users: {stats.totalUsers}</p>
         <p>Total Stores: {stats.totalStores}</p>
         <p>Total Ratings: {stats.totalRatings}</p>
       </div>
 
-      <div>
+      <div className="card">
         <h3>Add User</h3>
         <input placeholder="Name" value={newUser.name} onChange={(e) => setNewUser({ ...newUser, name: e.target.value })} />
         <input placeholder="Email" value={newUser.email} onChange={(e) => setNewUser({ ...newUser, email: e.target.value })} />
@@ -97,7 +100,7 @@ const AdminDashboard = () => {
         <button onClick={addUser}>Add User</button>
       </div>
 
-      <div>
+      <div className="card">
         <h3>Add Store</h3>
         <input placeholder="Name" value={newStore.name} onChange={(e) => setNewStore({ ...newStore, name: e.target.value })} />
         <input placeholder="Email" value={newStore.email} onChange={(e) => setNewStore({ ...newStore, email: e.target.value })} />
@@ -106,14 +109,14 @@ const AdminDashboard = () => {
         <button onClick={addStore}>Add Store</button>
       </div>
 
-      <div>
+      <div className="card">
         <h3>Users</h3>
         <ul>
           {users.map(u => <li key={u.id}>{u.name} - {u.email} - {u.role}</li>)}
         </ul>
       </div>
 
-      <div>
+      <div className="card">
         <h3>Stores</h3>
         <ul>
           {stores.map(s => <li key={s.id}>{s.name} - {s.address} - Rating: {s.rating}</li>)}
